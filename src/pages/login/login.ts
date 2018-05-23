@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ToastController } from 'ionic-angular';
 import { GooglePlus } from '@ionic-native/google-plus';
 import { AngularFireModule } from "angularfire2";
-import firebase  from "firebase";
+import firebase  from "firebase/app";
 
 import { HomePage } from '../home/home';
 
@@ -30,7 +30,7 @@ export class LoginPage {
     }).then((result) => {
       console.log('Login Success' + JSON.stringify(result));
       
-      firebase.auth().signInWithCredential(firebase.auth.GoogleAuthProvider.credential(result.idToken))
+      firebase.auth().signInAndRetrieveDataWithCredential(firebase.auth.GoogleAuthProvider.credential(result.idToken))
               .then((success) => {
                 let toast  = this.toastCtrl.create({
                   message: 'Successfully Login in to your account.',
